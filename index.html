@@ -1,0 +1,2508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MineralTrade Africa - Complete Mineral Trading Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        :root {
+            --primary: #1a5f7a;
+            --primary-dark: #0e4a63;
+            --secondary: #57C5B6;
+            --accent: #159895;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --gray: #6c757d;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --info: #17a2b8;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+            --radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo-tagline {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: -5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 8px 0;
+            position: relative;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 3px;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+
+        .btn-warning {
+            background-color: var(--warning);
+            color: #212529;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(22, 88, 112, 0.95) 0%, rgba(21, 152, 149, 0.9) 100%), url('https://images.unsplash.com/photo-1586769852044-692ebda4b4c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .hero-features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .hero-feature {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 10px 20px;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Platform Dashboard */
+        .dashboard-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .dashboard-card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 4px solid var(--primary);
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .dashboard-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .dashboard-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        /* System Modules Grid */
+        .modules-section {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .module-card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .module-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .module-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            width: 60px;
+            height: 60px;
+            background-color: #e8f4fc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .module-header h3 {
+            font-size: 1.3rem;
+            color: var(--dark);
+        }
+
+        .module-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .module-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f1f1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .module-features li:last-child {
+            border-bottom: none;
+        }
+
+        .module-features i {
+            color: var(--success);
+            font-size: 0.9rem;
+        }
+
+        /* Tabs System */
+        .tabs-container {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .tabs-header {
+            display: flex;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #eee;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            padding: 20px 30px;
+            background: none;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn.active {
+            background-color: white;
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-content {
+            padding: 30px;
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Live Bidding Section */
+        .live-bidding-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #dc3545;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+            margin-bottom: 30px;
+            width: fit-content;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .live-indicator i {
+            animation: pulse 1s infinite;
+        }
+
+        .bidding-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 992px) {
+            .bidding-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .active-auctions {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid #eaeaea;
+        }
+
+        .auctions-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .auctions-list {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .auction-item {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .auction-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .auction-item.active {
+            background-color: #e8f4fc;
+            border-left: 4px solid var(--primary);
+        }
+
+        .auction-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .auction-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .auction-price {
+            text-align: right;
+        }
+
+        .current-bid {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .time-remaining {
+            font-size: 0.9rem;
+            color: var(--danger);
+            font-weight: 600;
+        }
+
+        /* Bidding Interface */
+        .bidding-interface {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            position: sticky;
+            top: 100px;
+            border: 1px solid #eaeaea;
+        }
+
+        .bidding-item-header {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .bidding-item-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .item-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 0.95rem;
+            color: var(--gray);
+            flex-wrap: wrap;
+        }
+
+        .current-bid-display {
+            text-align: center;
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: var(--radius);
+        }
+
+        .bid-history {
+            margin: 25px 0;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #eee;
+            border-radius: var(--radius);
+            padding: 15px;
+        }
+
+        .bid-history h4 {
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-size: 1.1rem;
+        }
+
+        .bid-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .bid-item:last-child {
+            border-bottom: none;
+        }
+
+        .bidder-name {
+            font-weight: 500;
+        }
+
+        .bid-amount {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .bid-time {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .bid-form {
+            margin-top: 25px;
+        }
+
+        .bid-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .bid-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: var(--radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .bid-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .quick-bid-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .quick-bid-btn {
+            padding: 10px;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .quick-bid-btn:hover {
+            background-color: #e9ecef;
+            border-color: var(--primary);
+        }
+
+        .bid-notification {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 12px 15px;
+            border-radius: var(--radius);
+            margin-top: 20px;
+            display: none;
+        }
+
+        .bid-notification.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Analytics Dashboard */
+        .analytics-section {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+
+        .analytics-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .time-filters {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .time-filter {
+            padding: 8px 16px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .time-filter.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .stat-icon.blue { background-color: #3498db; }
+        .stat-icon.green { background-color: #2ecc71; }
+        .stat-icon.orange { background-color: #e67e22; }
+        .stat-icon.purple { background-color: #9b59b6; }
+
+        .stat-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .stat-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .chart-title {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Lifecycle Tracking */
+        .lifecycle-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .lifecycle-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 992px) {
+            .lifecycle-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .assets-list {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            max-height: 600px;
+            overflow-y: auto;
+            border: 1px solid #eaeaea;
+        }
+
+        .assets-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 20px;
+            font-weight: 600;
+        }
+
+        .asset-item {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .asset-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .asset-item.active {
+            background-color: #e8f4fc;
+            border-left: 4px solid var(--primary);
+        }
+
+        .asset-id {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 5px;
+            font-family: monospace;
+        }
+
+        .asset-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .asset-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .asset-status {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .status-mined { background-color: #d1ecf1; color: #0c5460; }
+        .status-verified { background-color: #d4edda; color: #155724; }
+        .status-trading { background-color: #cce5ff; color: #004085; }
+        .status-shipping { background-color: #f8d7da; color: #721c24; }
+        .status-delivered { background-color: #d4edda; color: #155724; }
+
+        .lifecycle-details {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            position: sticky;
+            top: 100px;
+            max-height: 600px;
+            overflow-y: auto;
+            border: 1px solid #eaeaea;
+        }
+
+        /* Minerals Marketplace */
+        .minerals-section {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+
+        .minerals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .mineral-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid #eaeaea;
+        }
+
+        .mineral-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .mineral-img {
+            height: 160px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .mineral-info {
+            padding: 20px;
+        }
+
+        .mineral-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+
+        .mineral-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 4px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-small:hover {
+            background-color: var(--accent);
+        }
+
+        /* Login/Register Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            display: none;
+        }
+
+        .modal {
+            background-color: white;
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        .modal-header {
+            padding: 25px;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-size: 1.5rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 95, 122, 0.1);
+        }
+
+        .form-footer {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .form-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .form-tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 25px;
+        }
+
+        .form-tab {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--gray);
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+
+        .form-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .footer-about p {
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .footer-links h4, .footer-contact h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 60px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--gray);
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links, .auth-buttons {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding: 70px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .dashboard-section, .modules-section, .live-bidding-section, .analytics-section, .lifecycle-section, .minerals-section {
+                padding: 60px 0;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 40px;
+            }
+            
+            .analytics-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .quick-bid-buttons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero-features {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .auction-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .auction-price {
+                text-align: left;
+                width: 100%;
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100vh;
+            background-color: white;
+            z-index: 1500;
+            transition: var(--transition);
+            padding: 80px 30px 30px;
+            overflow-y: auto;
+        }
+
+        .mobile-nav.active {
+            left: 0;
+        }
+
+        .mobile-nav a {
+            display: block;
+            padding: 15px 0;
+            font-size: 1.1rem;
+            color: var(--dark);
+            text-decoration: none;
+            border-bottom: 1px solid #eee;
+            font-weight: 500;
+        }
+
+        .mobile-nav a.active {
+            color: var(--primary);
+        }
+
+        .mobile-auth {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .close-mobile-nav {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        .mt-30 {
+            margin-top: 30px;
+        }
+
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+
+        .mb-30 {
+            margin-bottom: 30px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <i class="fas fa-gem logo-icon"></i>
+                <div>
+                    <div class="logo-text">MineralTrade Africa</div>
+                    <div class="logo-tagline">Complete Trading Platform</div>
+                </div>
+            </a>
+            
+            <nav class="nav-links">
+                <a href="#home" class="active">Home</a>
+                <a href="#dashboard">Dashboard</a>
+                <a href="#minerals">Marketplace</a>
+                <a href="#bidding">Live Bidding</a>
+                <a href="#analytics">Analytics</a>
+                <a href="#lifecycle">Lifecycle</a>
+                <a href="#modules">Platform</a>
+            </nav>
+            
+            <div class="auth-buttons">
+                <button class="btn btn-outline" id="loginBtn">Login</button>
+                <button class="btn btn-primary" id="registerBtn">Register</button>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <button class="close-mobile-nav" id="closeMobileNav">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="#home" class="active">Home</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#minerals">Marketplace</a>
+        <a href="#bidding">Live Bidding</a>
+        <a href="#analytics">Analytics</a>
+        <a href="#lifecycle">Lifecycle</a>
+        <a href="#modules">Platform</a>
+        
+        <div class="mobile-auth">
+            <button class="btn btn-outline" id="mobileLoginBtn">Login</button>
+            <button class="btn btn-primary" id="mobileRegisterBtn">Register</button>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1>Africa's Complete Mineral Trading Platform</h1>
+            <p>End-to-end solution for mineral trading: Marketplace, Live Bidding, Analytics, Lifecycle Tracking, Banking, Consulting & Risk Management.</p>
+            
+            <div class="hero-features">
+                <div class="hero-feature">
+                    <i class="fas fa-gem"></i>
+                    <span>Mineral Deals</span>
+                </div>
+                <div class="hero-feature">
+                    <i class="fas fa-gavel"></i>
+                    <span>Spot Bidding</span>
+                </div>
+                <div class="hero-feature">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </div>
+                <div class="hero-feature">
+                    <i class="fas fa-project-diagram"></i>
+                    <span>Lifecycle Tracking</span>
+                </div>
+            </div>
+            
+            <div>
+                <button class="btn btn-primary" style="padding: 15px 30px; font-size: 1.1rem;">
+                    <i class="fas fa-rocket"></i>
+                    Launch Full Platform
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Dashboard -->
+    <section class="dashboard-section" id="dashboard">
+        <div class="container">
+            <h2 class="section-title">Trading Dashboard</h2>
+            <p class="section-subtitle">Access all platform features from a single dashboard</p>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="dashboard-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3>Mineral Deals</h3>
+                    <p>Browse and purchase mineral commodities from verified suppliers across Africa.</p>
+                    <button class="btn btn-primary mt-20" onclick="showTab('minerals-tab')">
+                        <i class="fas fa-shopping-cart"></i>
+                        View Marketplace
+                    </button>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="dashboard-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h3>Spot Bidding</h3>
+                    <p>Participate in live auctions for premium mineral lots with real-time bidding.</p>
+                    <button class="btn btn-primary mt-20" onclick="showTab('bidding-tab')">
+                        <i class="fas fa-hammer"></i>
+                        Join Live Bidding
+                    </button>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="dashboard-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Market Analytics</h3>
+                    <p>Advanced analytics, price trends, and market intelligence for informed trading.</p>
+                    <button class="btn btn-primary mt-20" onclick="showTab('analytics-tab')">
+                        <i class="fas fa-chart-bar"></i>
+                        View Analytics
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Modules Tabs -->
+    <section class="modules-section" id="modules">
+        <div class="container">
+            <h2 class="section-title">Complete Platform Modules</h2>
+            <p class="section-subtitle">Integrated system covering all aspects of mineral trading</p>
+            
+            <div class="tabs-container">
+                <div class="tabs-header">
+                    <button class="tab-btn active" data-tab="minerals-tab">
+                        <i class="fas fa-gem"></i>
+                        Mineral Deals
+                    </button>
+                    <button class="tab-btn" data-tab="bidding-tab">
+                        <i class="fas fa-gavel"></i>
+                        Spot Bidding
+                    </button>
+                    <button class="tab-btn" data-tab="consulting-tab">
+                        <i class="fas fa-user-tie"></i>
+                        Consulting
+                    </button>
+                    <button class="tab-btn" data-tab="banking-tab">
+                        <i class="fas fa-university"></i>
+                        Banking & Risk
+                    </button>
+                    <button class="tab-btn" data-tab="lifecycle-tab">
+                        <i class="fas fa-project-diagram"></i>
+                        Lifecycle Tracking
+                    </button>
+                    <button class="tab-btn" data-tab="analytics-tab">
+                        <i class="fas fa-chart-line"></i>
+                        Analytics
+                    </button>
+                </div>
+                
+                <!-- Mineral Deals Tab -->
+                <div class="tab-content active" id="minerals-tab">
+                    <div class="module-card">
+                        <div class="module-header">
+                            <div class="module-icon">
+                                <i class="fas fa-gem"></i>
+                            </div>
+                            <h3>Mineral Marketplace</h3>
+                        </div>
+                        <p>Direct purchase of verified mineral commodities from trusted African suppliers.</p>
+                        
+                        <ul class="module-features">
+                            <li><i class="fas fa-check-circle"></i> Verified suppliers with quality certifications</li>
+                            <li><i class="fas fa-check-circle"></i> Escrow-protected transactions</li>
+                            <li><i class="fas fa-check-circle"></i> Transparent pricing and specifications</li>
+                            <li><i class="fas fa-check-circle"></i> Logistics and shipping coordination</li>
+                            <li><i class="fas fa-check-circle"></i> Quality assurance and dispute resolution</li>
+                        </ul>
+                        
+                        <div class="minerals-grid mt-30">
+                            <div class="mineral-card">
+                                <img src="https://images.unsplash.com/photo-1565374396456-8e03f7a4ab12?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Gold Ore" class="mineral-img">
+                                <div class="mineral-info">
+                                    <h3 class="mineral-name">Gold Ore (High Grade)</h3>
+                                    <p class="mineral-price">$58,320 / kg</p>
+                                    <p><i class="fas fa-map-marker-alt"></i> Ghana | 500kg available</p>
+                                    <button class="btn-small mt-20" style="width: 100%;">View Details</button>
+                                </div>
+                            </div>
+                            
+                            <div class="mineral-card">
+                                <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Copper Cathodes" class="mineral-img">
+                                <div class="mineral-info">
+                                    <h3 class="mineral-name">Copper Cathodes</h3>
+                                    <p class="mineral-price">$8,450 / ton</p>
+                                    <p><i class="fas fa-map-marker-alt"></i> Zambia | 1000 tons available</p>
+                                    <button class="btn-small mt-20" style="width: 100%;">View Details</button>
+                                </div>
+                            </div>
+                            
+                            <div class="mineral-card">
+                                <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab8be?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Diamond Rough" class="mineral-img">
+                                <div class="mineral-info">
+                                    <h3 class="mineral-name">Diamond Rough</h3>
+                                    <p class="mineral-price">$1,200 / carat</p>
+                                    <p><i class="fas fa-map-marker-alt"></i> Botswana | 500 carats available</p>
+                                    <button class="btn-small mt-20" style="width: 100%;">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Spot Bidding Tab -->
+                <div class="tab-content" id="bidding-tab">
+                    <div class="module-card">
+                        <div class="module-header">
+                            <div class="module-icon">
+                                <i class="fas fa-gavel"></i>
+                            </div>
+                            <h3>Live Spot Bidding</h3>
+                        </div>
+                        <p>Real-time auction system for premium mineral lots with competitive bidding.</p>
+                        
+                        <div class="live-indicator">
+                            <i class="fas fa-circle"></i>
+                            <span>LIVE BIDDING ACTIVE - 4 AUCTIONS LIVE</span>
+                        </div>
+                        
+                        <div class="bidding-grid mt-30">
+                            <div class="active-auctions">
+                                <div class="auctions-header">
+                                    <h3>Active Auctions</h3>
+                                    <span id="activeAuctionCount">4 auctions live</span>
+                                </div>
+                                <div class="auctions-list" id="auctionsList">
+                                    <!-- Auctions will be loaded dynamically -->
+                                </div>
+                            </div>
+                            
+                            <div class="bidding-interface">
+                                <div class="bidding-item-header">
+                                    <h3 id="selectedAuctionName">Select an Auction to Bid</h3>
+                                    <div class="item-meta">
+                                        <span><i class="fas fa-map-marker-alt"></i> <span id="selectedAuctionLocation">-</span></span>
+                                        <span><i class="fas fa-weight"></i> <span id="selectedAuctionQuantity">-</span></span>
+                                        <span><i class="fas fa-clock"></i> Ends in: <span id="selectedAuctionTime">-</span></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="current-bid-display">
+                                    <div style="font-size: 0.9rem; color: var(--gray); margin-bottom: 5px;">CURRENT BID</div>
+                                    <div id="currentBidAmount" style="font-size: 2.5rem; font-weight: 800; color: var(--primary);">$ -</div>
+                                    <div style="font-size: 0.9rem; color: var(--gray); margin-top: 5px;">by <span id="currentBidder">-</span></div>
+                                </div>
+                                
+                                <div class="bid-form">
+                                    <div class="quick-bid-buttons" id="quickBidButtons">
+                                        <!-- Quick bids will be loaded dynamically -->
+                                    </div>
+                                    
+                                    <div class="bid-input-group">
+                                        <input type="number" class="bid-input" id="bidAmount" placeholder="Enter your bid" min="0" step="100">
+                                        <button class="btn btn-success" id="placeBidBtn">
+                                            <i class="fas fa-gavel"></i>
+                                            Place Bid
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="bid-notification" id="bidNotification">
+                                        Your bid has been placed successfully!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Consulting Tab -->
+                <div class="tab-content" id="consulting-tab">
+                    <div class="module-card">
+                        <div class="module-header">
+                            <div class="module-icon">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <h3>Consulting Services</h3>
+                        </div>
+                        <p>Expert advisory services for mineral trading, market analysis, and regulatory compliance.</p>
+                        
+                        <div class="modules-grid mt-30">
+                            <div class="module-card">
+                                <div class="module-header">
+                                    <div class="module-icon">
+                                        <i class="fas fa-chart-pie"></i>
+                                    </div>
+                                    <h3>Market Analysis</h3>
+                                </div>
+                                <p>Comprehensive market research and price forecasting for strategic trading decisions.</p>
+                                <button class="btn btn-outline mt-20">Request Analysis</button>
+                            </div>
+                            
+                            <div class="module-card">
+                                <div class="module-header">
+                                    <div class="module-icon">
+                                        <i class="fas fa-balance-scale"></i>
+                                    </div>
+                                    <h3>Legal & Compliance</h3>
+                                </div>
+                                <p>Regulatory compliance, contract negotiation, and legal advisory for mineral trading.</p>
+                                <button class="btn btn-outline mt-20">Consult Experts</button>
+                            </div>
+                            
+                            <div class="module-card">
+                                <div class="module-header">
+                                    <div class="module-icon">
+                                        <i class="fas fa-flask"></i>
+                                    </div>
+                                    <h3>Quality Verification</h3>
+                                </div>
+                                <p>Independent mineral testing, quality assessment, and certification services.</p>
+                                <button class="btn btn-outline mt-20">Schedule Testing</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Banking & Risk Tab -->
+                <div class="tab-content" id="banking-tab">
+                    <div class="module-card">
+                        <div class="module-header">
+                            <div class="module-icon">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <h3>Banking & Risk Management</h3>
+                        </div>
+                        <p>Financial services, escrow protection, insurance, and risk mitigation for secure trading.</p>
+                        
+                        <div class="modules-grid mt-30">
+                            <div class="module-card">
+                                <div class="module-header">
+                                    <div class="module-icon">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <h3>Escrow Services</h3>
+                                </div>
+                                <p>Secure escrow accounts with funds released only upon successful delivery verification.</p>
+                                <button class="btn btn-outline mt-20">Setup Escrow</button>
+                            </div>
+                            
+                            <div class="module-card">
+                                <div class="module-header">
+                                    <div class="module-icon">
+                                        <i class="fas fa-file-contract"></i>
+                                    </div>
+                                    <h3>Trade Finance</h3>
+                                </div>
+                                <p>Letters of credit, trade financing, and payment solutions for international transactions.</p>
+                                <button class="btn btn-outline mt-20">Apply for Finance</button>
+                            </div>
+                            
+                            <div class="module-card">
+                                <div class="module-header">
+                                    <div class="module-icon">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </div>
+                                    <h3>Risk Insurance</h3>
+                                </div>
+                                <p>Comprehensive insurance coverage for shipping, quality, and political risks.</p>
+                                <button class="btn btn-outline mt-20">Get Insured</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lifecycle Tracking Tab -->
+                <div class="tab-content" id="lifecycle-tab">
+                    <div class="module-card">
+                        <div class="module-header">
+                            <div class="module-icon">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <h3>Lifecycle Tracking</h3>
+                        </div>
+                        <p>Blockchain-verified tracking of minerals from mine to market with full transparency.</p>
+                        
+                        <div class="lifecycle-grid mt-30">
+                            <div class="assets-list">
+                                <div class="assets-header">
+                                    <i class="fas fa-cubes"></i>
+                                    Tracked Assets
+                                </div>
+                                <div id="assetsContainer">
+                                    <!-- Assets will be loaded dynamically -->
+                                </div>
+                            </div>
+                            
+                            <div class="lifecycle-details">
+                                <div class="asset-header">
+                                    <h3 id="selectedAssetName">Select a mineral asset</h3>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                                        <div>
+                                            <span class="asset-status" id="selectedAssetStatus">-</span>
+                                        </div>
+                                        <div style="font-size: 0.9rem; color: var(--gray);">
+                                            <i class="fas fa-fingerprint"></i>
+                                            <span id="selectedAssetId">-</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div id="assetDetails" style="display: none;">
+                                    <div style="padding: 20px; background-color: #f8f9fa; border-radius: var(--radius); margin: 20px 0;">
+                                        <h4><i class="fas fa-info-circle"></i> Asset Information</h4>
+                                        <p><strong>Location:</strong> <span id="assetLocation">-</span></p>
+                                        <p><strong>Quantity:</strong> <span id="assetQuantity">-</span></p>
+                                        <p><strong>Current Owner:</strong> <span id="assetOwner">-</span></p>
+                                        <p><strong>Blockchain Verified:</strong> <span style="color: var(--success);">✓ Verified</span></p>
+                                    </div>
+                                    
+                                    <button class="btn btn-primary mt-20" style="width: 100%;">
+                                        <i class="fas fa-expand"></i>
+                                        View Complete Lifecycle
+                                    </button>
+                                </div>
+                                
+                                <div id="noAssetSelected" style="text-align: center; padding: 40px 20px; color: var(--gray);">
+                                    <i class="fas fa-cube" style="font-size: 3rem; margin-bottom: 20px; opacity: 0.3;"></i>
+                                    <h3 style="margin-bottom: 10px;">Select a Mineral Asset</h3>
+                                    <p>Choose a mineral asset from the list to view its lifecycle tracking information.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Analytics Tab -->
+                <div class="tab-content" id="analytics-tab">
+                    <div class="module-card">
+                        <div class="module-header">
+                            <div class="module-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3>Market Analytics</h3>
+                        </div>
+                        <p>Comprehensive data analytics, market intelligence, and trading insights.</p>
+                        
+                        <div class="analytics-header mt-30">
+                            <h3 style="font-size: 1.5rem;">Trading Analytics</h3>
+                            <div class="time-filters">
+                                <div class="time-filter active">Today</div>
+                                <div class="time-filter">Week</div>
+                                <div class="time-filter">Month</div>
+                                <div class="time-filter">Quarter</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stats-grid mt-30">
+                            <div class="stat-card">
+                                <div class="stat-icon blue">
+                                    <i class="fas fa-handshake"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="totalTrades">142</h3>
+                                    <p>Total Trades</p>
+                                    <small style="color: #2ecc71;">↑ 12% from last week</small>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-icon green">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="totalVolume">$48.2M</h3>
+                                    <p>Total Volume</p>
+                                    <small style="color: #2ecc71;">↑ 8% from last month</small>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-icon orange">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="activeTraders">324</h3>
+                                    <p>Active Traders</p>
+                                    <small style="color: #2ecc71;">↑ 5% from last week</small>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-icon purple">
+                                    <i class="fas fa-percentage"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="successRate">94.7%</h3>
+                                    <p>Success Rate</p>
+                                    <small style="color: #2ecc71;">↑ 2.3% from last quarter</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-container mt-30">
+                            <div class="chart-title">
+                                <i class="fas fa-chart-line"></i>
+                                Mineral Price Trends
+                            </div>
+                            <div class="chart-wrapper">
+                                <canvas id="priceTrendChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login/Register Modal -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Login to MineralTrade</h3>
+                <button class="close-modal" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-tabs">
+                    <div class="form-tab active" id="loginTab">Login</div>
+                    <div class="form-tab" id="registerTab">Register</div>
+                </div>
+                
+                <div class="tab-content active" id="loginForm">
+                    <form id="loginFormElement">
+                        <div class="form-group">
+                            <label for="loginEmail">Email Address</label>
+                            <input type="email" id="loginEmail" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" class="form-control" placeholder="Enter your password" required>
+                        </div>
+                        
+                        <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <input type="checkbox" id="rememberMe">
+                                <label for="rememberMe">Remember me</label>
+                            </div>
+                            <a href="#" style="font-size: 0.9rem;">Forgot password?</a>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px;">Login</button>
+                    </form>
+                    
+                    <div class="form-footer">
+                        <p>Don't have an account? <a href="#" id="switchToRegister">Register here</a></p>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="registerForm">
+                    <form id="registerFormElement">
+                        <div class="form-group">
+                            <label for="registerName">Full Name</label>
+                            <input type="text" id="registerName" class="form-control" placeholder="Enter your full name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerEmail">Email Address</label>
+                            <input type="email" id="registerEmail" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerCompany">Company Name</label>
+                            <input type="text" id="registerCompany" class="form-control" placeholder="Enter your company name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerRole">I am a:</label>
+                            <select id="registerRole" class="form-control" required>
+                                <option value="">Select role</option>
+                                <option value="buyer">Mineral Buyer</option>
+                                <option value="supplier">Mineral Supplier</option>
+                                <option value="trader">Trader/Broker</option>
+                                <option value="investor">Investor</option>
+                                <option value="logistics">Logistics Provider</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerPassword">Password</label>
+                            <input type="password" id="registerPassword" class="form-control" placeholder="Create a password" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerConfirmPassword">Confirm Password</label>
+                            <input type="password" id="registerConfirmPassword" class="form-control" placeholder="Confirm your password" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="checkbox" id="agreeTerms" required>
+                            <label for="agreeTerms">I agree to the <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a></label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px;">Create Account</button>
+                    </form>
+                    
+                    <div class="form-footer">
+                        <p>Already have an account? <a href="#" id="switchToLogin">Login here</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">MineralTrade Africa</div>
+                    <p>Complete mineral trading platform with marketplace, bidding, analytics, lifecycle tracking, banking, and consulting services.</p>
+                    <div style="margin-top: 20px;">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-rocket"></i>
+                            Start Trading
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Platform Modules</h4>
+                    <ul>
+                        <li><a href="#" onclick="showTab('minerals-tab'); return false;">Mineral Deals</a></li>
+                        <li><a href="#" onclick="showTab('bidding-tab'); return false;">Spot Bidding</a></li>
+                        <li><a href="#" onclick="showTab('consulting-tab'); return false;">Consulting</a></li>
+                        <li><a href="#" onclick="showTab('banking-tab'); return false;">Banking & Risk</a></li>
+                        <li><a href="#" onclick="showTab('lifecycle-tab'); return false;">Lifecycle Tracking</a></li>
+                        <li><a href="#" onclick="showTab('analytics-tab'); return false;">Analytics</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Contact Support</h4>
+                    <p><i class="fas fa-envelope"></i> support@mineraltrade.africa</p>
+                    <p><i class="fas fa-phone"></i> +254 000 123 456</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                    <p><i class="fas fa-clock"></i> 24/7 Trading & Support</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 MineralTrade Africa. All rights reserved. | Complete Mineral Trading Platform</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Platform Data
+        const platformData = {
+            // Bidding Data
+            auctions: [
+                {
+                    id: 1,
+                    name: "High-Grade Gold Ore",
+                    location: "Ghana",
+                    quantity: "500kg",
+                    currentBid: 58320,
+                    currentBidder: "Global Minerals Inc.",
+                    timeRemaining: "2h 15m",
+                    quickBids: [58500, 59000, 59500, 60000],
+                    minIncrement: 100
+                },
+                {
+                    id: 2,
+                    name: "Copper Cathodes (99.9% purity)",
+                    location: "Zambia",
+                    quantity: "1000 tons",
+                    currentBid: 8450,
+                    currentBidder: "Metal Traders Co.",
+                    timeRemaining: "45m",
+                    quickBids: [8500, 8600, 8700, 8800],
+                    minIncrement: 50
+                },
+                {
+                    id: 3,
+                    name: "Diamond Rough (Gem Quality)",
+                    location: "Botswana",
+                    quantity: "500 carats",
+                    currentBid: 1200,
+                    currentBidder: "Diamond Consortium",
+                    timeRemaining: "1h 30m",
+                    quickBids: [1250, 1300, 1350, 1400],
+                    minIncrement: 50
+                }
+            ],
+            selectedAuctionId: 1,
+            
+            // Lifecycle Data
+            assets: [
+                {
+                    id: "MT-GOLD-001-2023",
+                    name: "High-Grade Gold Ore Batch #001",
+                    status: "trading",
+                    location: "Ashanti Mine, Ghana",
+                    quantity: "500kg",
+                    owner: "Ashanti Goldfields Ltd"
+                },
+                {
+                    id: "MT-COPPER-045-2023",
+                    name: "Copper Cathodes Lot #045",
+                    status: "shipping",
+                    location: "Indian Ocean (En Route)",
+                    quantity: "1000 tons",
+                    owner: "Metal Traders Co."
+                },
+                {
+                    id: "MT-DIAMOND-112-2023",
+                    name: "Gem Quality Diamonds (112 carats)",
+                    status: "verified",
+                    location: "Orapa Mine, Botswana",
+                    quantity: "112 carats",
+                    owner: "Botswana Diamond Co."
+                }
+            ],
+            selectedAssetId: "MT-GOLD-001-2023",
+            
+            // Analytics Data
+            totalTrades: 142,
+            totalVolume: "$48.2M",
+            activeTraders: 324,
+            successRate: "94.7%"
+        };
+
+        // Initialize Platform
+        function initializePlatform() {
+            // Initialize bidding system
+            initializeBiddingSystem();
+            
+            // Initialize lifecycle tracking
+            initializeLifecycleTracking();
+            
+            // Initialize analytics
+            updateAnalytics();
+            
+            // Setup tab system
+            setupTabSystem();
+            
+            // Setup authentication
+            setupAuthentication();
+            
+            // Initialize charts
+            initializeCharts();
+        }
+
+        // Bidding System
+        function initializeBiddingSystem() {
+            renderAuctionsList();
+            loadAuctionDetails(platformData.selectedAuctionId);
+        }
+
+        function renderAuctionsList() {
+            const auctionsList = document.getElementById('auctionsList');
+            auctionsList.innerHTML = '';
+            
+            platformData.auctions.forEach(auction => {
+                const isActive = auction.id === platformData.selectedAuctionId;
+                const auctionElement = document.createElement('div');
+                auctionElement.className = `auction-item ${isActive ? 'active' : ''}`;
+                auctionElement.dataset.auctionId = auction.id;
+                auctionElement.innerHTML = `
+                    <div class="auction-info">
+                        <h4>${auction.name}</h4>
+                        <div class="auction-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> ${auction.location}</span>
+                            <span><i class="fas fa-weight"></i> ${auction.quantity}</span>
+                        </div>
+                    </div>
+                    <div class="auction-price">
+                        <div class="current-bid">$${auction.currentBid.toLocaleString()}</div>
+                        <div class="time-remaining"><i class="fas fa-clock"></i> ${auction.timeRemaining}</div>
+                    </div>
+                `;
+                
+                auctionElement.addEventListener('click', () => {
+                    selectAuction(auction.id);
+                });
+                
+                auctionsList.appendChild(auctionElement);
+            });
+            
+            document.getElementById('activeAuctionCount').textContent = `${platformData.auctions.length} auctions live`;
+        }
+
+        function selectAuction(auctionId) {
+            platformData.selectedAuctionId = auctionId;
+            renderAuctionsList();
+            loadAuctionDetails(auctionId);
+        }
+
+        function loadAuctionDetails(auctionId) {
+            const auction = platformData.auctions.find(a => a.id === auctionId);
+            if (!auction) return;
+            
+            document.getElementById('selectedAuctionName').textContent = auction.name;
+            document.getElementById('selectedAuctionLocation').textContent = auction.location;
+            document.getElementById('selectedAuctionQuantity').textContent = auction.quantity;
+            document.getElementById('selectedAuctionTime').textContent = auction.timeRemaining;
+            document.getElementById('currentBidAmount').textContent = `$${auction.currentBid.toLocaleString()}`;
+            document.getElementById('currentBidder').textContent = auction.currentBidder;
+            
+            renderQuickBidButtons(auction.quickBids, auction.minIncrement);
+            
+            const bidInput = document.getElementById('bidAmount');
+            bidInput.min = auction.currentBid + auction.minIncrement;
+            bidInput.value = auction.currentBid + auction.minIncrement;
+            bidInput.placeholder = `Min bid: $${(auction.currentBid + auction.minIncrement).toLocaleString()}`;
+        }
+
+        function renderQuickBidButtons(quickBids, minIncrement) {
+            const quickBidButtons = document.getElementById('quickBidButtons');
+            quickBidButtons.innerHTML = '';
+            
+            quickBids.forEach(bidAmount => {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'quick-bid-btn';
+                button.textContent = `$${bidAmount.toLocaleString()}`;
+                button.addEventListener('click', () => {
+                    document.getElementById('bidAmount').value = bidAmount;
+                    placeBid(bidAmount);
+                });
+                quickBidButtons.appendChild(button);
+            });
+        }
+
+        function placeBid(bidAmount) {
+            const auction = platformData.auctions.find(a => a.id === platformData.selectedAuctionId);
+            if (!auction) return;
+            
+            if (bidAmount < auction.currentBid + auction.minIncrement) {
+                showNotification(`Bid must be at least $${(auction.currentBid + auction.minIncrement).toLocaleString()}`, true);
+                return;
+            }
+            
+            const bidderNames = ["You", "Premium Minerals Co.", "African Traders Ltd"];
+            const randomBidder = bidderNames[Math.floor(Math.random() * bidderNames.length)];
+            
+            auction.currentBid = bidAmount;
+            auction.currentBidder = randomBidder;
+            
+            loadAuctionDetails(platformData.selectedAuctionId);
+            showNotification(`Your bid of $${bidAmount.toLocaleString()} has been placed successfully!`);
+            
+            // Update analytics
+            platformData.totalTrades++;
+            updateAnalytics();
+        }
+
+        // Lifecycle Tracking
+        function initializeLifecycleTracking() {
+            renderAssetsList();
+            loadAssetDetails(platformData.selectedAssetId);
+        }
+
+        function renderAssetsList() {
+            const assetsContainer = document.getElementById('assetsContainer');
+            assetsContainer.innerHTML = '';
+            
+            platformData.assets.forEach(asset => {
+                const isActive = asset.id === platformData.selectedAssetId;
+                const assetElement = document.createElement('div');
+                assetElement.className = `asset-item ${isActive ? 'active' : ''}`;
+                assetElement.dataset.assetId = asset.id;
+                
+                const statusClass = `status-${asset.status}`;
+                const statusText = getStatusText(asset.status);
+                
+                assetElement.innerHTML = `
+                    <div>
+                        <div class="asset-id">${asset.id}</div>
+                        <div class="asset-name">${asset.name}</div>
+                        <div class="asset-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> ${asset.location}</span>
+                            <span><i class="fas fa-weight"></i> ${asset.quantity}</span>
+                        </div>
+                        <div class="asset-status ${statusClass}">${statusText}</div>
+                    </div>
+                `;
+                
+                assetElement.addEventListener('click', () => {
+                    selectAsset(asset.id);
+                });
+                
+                assetsContainer.appendChild(assetElement);
+            });
+        }
+
+        function getStatusText(status) {
+            const statusMap = {
+                "mined": "Recently Mined",
+                "verified": "Quality Verified",
+                "trading": "Active Trading",
+                "shipping": "In Transit",
+                "delivered": "Delivered"
+            };
+            return statusMap[status] || status;
+        }
+
+        function selectAsset(assetId) {
+            platformData.selectedAssetId = assetId;
+            renderAssetsList();
+            loadAssetDetails(assetId);
+        }
+
+        function loadAssetDetails(assetId) {
+            const asset = platformData.assets.find(a => a.id === assetId);
+            if (!asset) return;
+            
+            document.getElementById('assetDetails').style.display = 'block';
+            document.getElementById('noAssetSelected').style.display = 'none';
+            
+            document.getElementById('selectedAssetName').textContent = asset.name;
+            document.getElementById('selectedAssetId').textContent = asset.id;
+            
+            const statusElement = document.getElementById('selectedAssetStatus');
+            statusElement.textContent = getStatusText(asset.status);
+            statusElement.className = `asset-status status-${asset.status}`;
+            
+            document.getElementById('assetLocation').textContent = asset.location;
+            document.getElementById('assetQuantity').textContent = asset.quantity;
+            document.getElementById('assetOwner').textContent = asset.owner;
+        }
+
+        // Analytics
+        function updateAnalytics() {
+            document.getElementById('totalTrades').textContent = platformData.totalTrades;
+            document.getElementById('totalVolume').textContent = platformData.totalVolume;
+            document.getElementById('activeTraders').textContent = platformData.activeTraders;
+            document.getElementById('successRate').textContent = platformData.successRate;
+        }
+
+        // Tab System
+        function setupTabSystem() {
+            document.querySelectorAll('.tab-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const tabId = this.dataset.tab;
+                    showTab(tabId);
+                });
+            });
+        }
+
+        function showTab(tabId) {
+            // Update tab buttons
+            document.querySelectorAll('.tab-btn').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            document.querySelector(`.tab-btn[data-tab="${tabId}"]`).classList.add('active');
+            
+            // Update tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            document.getElementById(tabId).classList.add('active');
+            
+            // Scroll to modules section
+            document.getElementById('modules').scrollIntoView({behavior: 'smooth'});
+        }
+
+        // Authentication
+        function setupAuthentication() {
+            const authModal = document.getElementById('authModal');
+            const loginBtn = document.getElementById('loginBtn');
+            const registerBtn = document.getElementById('registerBtn');
+            const mobileLoginBtn = document.getElementById('mobileLoginBtn');
+            const mobileRegisterBtn = document.getElementById('mobileRegisterBtn');
+            const closeModal = document.getElementById('closeModal');
+            const loginTab = document.getElementById('loginTab');
+            const registerTab = document.getElementById('registerTab');
+            const switchToRegister = document.getElementById('switchToRegister');
+            const switchToLogin = document.getElementById('switchToLogin');
+            const placeBidBtn = document.getElementById('placeBidBtn');
+            const bidAmountInput = document.getElementById('bidAmount');
+            
+            // Open modal functions
+            const openLoginModal = () => {
+                authModal.style.display = 'flex';
+                loginTab.classList.add('active');
+                registerTab.classList.remove('active');
+                document.getElementById('loginForm').classList.add('active');
+                document.getElementById('registerForm').classList.remove('active');
+                document.getElementById('modalTitle').textContent = 'Login to MineralTrade';
+                document.body.style.overflow = 'hidden';
+            };
+            
+            const openRegisterModal = () => {
+                authModal.style.display = 'flex';
+                registerTab.classList.add('active');
+                loginTab.classList.remove('active');
+                document.getElementById('registerForm').classList.add('active');
+                document.getElementById('loginForm').classList.remove('active');
+                document.getElementById('modalTitle').textContent = 'Register for MineralTrade';
+                document.body.style.overflow = 'hidden';
+            };
+            
+            // Event listeners
+            loginBtn.addEventListener('click', openLoginModal);
+            mobileLoginBtn.addEventListener('click', openLoginModal);
+            registerBtn.addEventListener('click', openRegisterModal);
+            mobileRegisterBtn.addEventListener('click', openRegisterModal);
+            
+            closeModal.addEventListener('click', () => {
+                authModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+            
+            loginTab.addEventListener('click', () => {
+                loginTab.classList.add('active');
+                registerTab.classList.remove('active');
+                document.getElementById('loginForm').classList.add('active');
+                document.getElementById('registerForm').classList.remove('active');
+                document.getElementById('modalTitle').textContent = 'Login to MineralTrade';
+            });
+            
+            registerTab.addEventListener('click', () => {
+                registerTab.classList.add('active');
+                loginTab.classList.remove('active');
+                document.getElementById('registerForm').classList.add('active');
+                document.getElementById('loginForm').classList.remove('active');
+                document.getElementById('modalTitle').textContent = 'Register for MineralTrade';
+            });
+            
+            switchToRegister.addEventListener('click', (e) => {
+                e.preventDefault();
+                registerTab.click();
+            });
+            
+            switchToLogin.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginTab.click();
+            });
+            
+            authModal.addEventListener('click', (e) => {
+                if (e.target === authModal) {
+                    authModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Form submissions
+            document.getElementById('loginFormElement').addEventListener('submit', (e) => {
+                e.preventDefault();
+                showNotification('Login successful! Welcome to MineralTrade.');
+                setTimeout(() => {
+                    authModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    placeBidBtn.disabled = false;
+                    bidAmountInput.disabled = false;
+                }, 500);
+            });
+            
+            document.getElementById('registerFormElement').addEventListener('submit', (e) => {
+                e.preventDefault();
+                showNotification('Account created successfully! Welcome to MineralTrade.');
+                setTimeout(() => {
+                    authModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    placeBidBtn.disabled = false;
+                    bidAmountInput.disabled = false;
+                }, 500);
+            });
+            
+            // Place bid button
+            placeBidBtn.addEventListener('click', () => {
+                const bidAmount = parseFloat(bidAmountInput.value);
+                if (!isNaN(bidAmount) && bidAmount > 0) {
+                    placeBid(bidAmount);
+                } else {
+                    showNotification('Please enter a valid bid amount', true);
+                }
+            });
+            
+            bidAmountInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    placeBidBtn.click();
+                }
+            });
+            
+            // Initially disable bidding until login
+            placeBidBtn.disabled = true;
+            bidAmountInput.disabled = true;
+            bidAmountInput.placeholder = "Login to place bids";
+        }
+
+        // Notification System
+        function showNotification(message, isError = false) {
+            const notification = document.getElementById('bidNotification');
+            notification.textContent = message;
+            notification.className = 'bid-notification';
+            
+            if (isError) {
+                notification.classList.add('error');
+            }
+            
+            notification.style.display = 'block';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 5000);
+        }
+
+        // Charts
+        function initializeCharts() {
+            const priceTrendCtx = document.getElementById('priceTrendChart').getContext('2d');
+            new Chart(priceTrendCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                    datasets: [
+                        {
+                            label: 'Gold',
+                            data: [52000, 53500, 54500, 56000, 57500, 58200, 58320],
+                            borderColor: '#FFD700',
+                            backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        },
+                        {
+                            label: 'Copper',
+                            data: [7800, 7900, 8100, 8300, 8400, 8450, 8450],
+                            borderColor: '#B87333',
+                            backgroundColor: 'rgba(184, 115, 51, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: { mode: 'index', intersect: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            title: { display: true, text: 'Price per unit' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const closeMobileNav = document.getElementById('closeMobileNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeMobileNav.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Initialize platform when page loads
+        document.addEventListener('DOMContentLoaded', initializePlatform);
+    </script>
+</body>
+</html>
